@@ -1,0 +1,170 @@
+body{
+   background-image: url("img/room.png");
+   background-position: center;
+   height: 80vh;
+   width: 10vh;   
+   background-repeat: no-repeat;
+   background-size: cover;
+
+ }
+
+
+#table{
+    width: 140px;
+    height: 105px;
+    bottom: 165px;
+    padding-left: 70px;
+    position: absolute;
+}
+
+
+#computer-left{
+bottom: 245px;
+position: absolute;
+width: 90px;
+height: 130px;;
+margin-left: 75px
+
+}
+
+#computer2-right{
+width: 110px;
+height: 195px;
+padding-left: 400px;
+position: absolute;
+bottom: 85px;
+
+}
+
+#cashier-chef{
+    position: absolute;
+    top:390px;
+    /* width: 120px; */
+    height: 150px;
+    margin-left: 100px;
+    z-index: 300;
+}
+
+ /* #freezer-closed{
+    position: absolute;
+    margin-left:540px;
+    bottom:245px;
+    height: 200px;
+     
+ } */
+
+
+ #freezer{
+    position: absolute;
+    bottom: 110px;
+    left: 1080px;
+    height: 200px;
+ }
+  
+#oven-with-cooked-pizza{
+    position: absolute;
+    z-index:300;
+    width: 150px;
+    left:520px;
+    bottom:225px;
+}
+
+#pizza-box{
+    bottom: 60px;
+    position: absolute;
+    margin-left: 450px;
+    width: 125px;
+    height: 60px; 
+
+}
+#chef {
+    position: absolute;
+    z-index:2000;
+    width:114px; 
+    top: 520px;
+    left: 1050px;
+    animation-name: moveToOven;
+	animation-duration:3s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+    animation-direction: normal;
+}
+ #piza1{
+     position:absolute;
+     height: 120px;
+     width: 230px;
+     bottom: 300px;
+     margin-left: 310px;
+     border-radius: 10px 10px 0px 40px;
+ }
+
+ #pizza2{
+    position: absolute;
+    height: 155px;
+    width: 330px;
+    bottom: 260px;
+    margin-left: 640px;
+    border-radius: 10px 10px 0px 40px;
+   
+ }
+
+ #table1{
+    width: 290px;
+    height: 140px;
+    top: 630px;
+    padding-left: 350px;
+    position: absolute;
+    /* z-index: 2; */
+ }
+
+ .person{
+     position:absolute;
+     bottom:-150px;
+     left:50px;
+     height:150px;
+     /* animation-name:customer;
+     animation-duration: 5s;
+     animation-fill-mode: forwards; */
+ }
+
+  @keyframes moveToOven {
+    from {
+        top: 520px;
+        left: 1050px;
+    }
+
+    to {
+        top: 440px;
+        left: 540px;
+    }
+}
+
+@keyframes moveToFreezer {
+    from {
+        top: 440px;
+        left: 540px;
+    }
+
+    to {
+        top: 520px;
+        left: 1050px;
+    }
+}
+
+@keyframes cashier-chef{
+    from {
+        top: 10px;
+        left: 540px;
+    }
+
+    to {
+        top: 520px;
+        left: 1050px;
+    }
+}
+.paused{
+    -webkit-animation-play-state:paused;
+    -moz-animation-play-state:paused;
+    -o-animation-play-state:paused; 
+    animation-play-state:paused;
+}
