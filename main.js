@@ -1,30 +1,41 @@
-const numberOfCustomers = 10;
+const numberOfCustomers = 2;
 
 let pizzasCooked = [];
 let pizzasOrdered = [];
 let ordersWaiting = [];
 let customerId = 1;
-let intervalId = setInterval(orderRecieved, 2000)
+const OVEN_SIZE = 2;
 
+let intervalId = setInterval(orderRecieved, 6000)
 
-
+// Cooks
 let cook = document.getElementById("chef");
 let packChef = document.getElementById("pack-chef");
 let cashierChef = document.getElementById("cashier-chef")
 
-
+// Objects
 let freezer = document.getElementById('freezer');
 let cookingOven = document.getElementById("oven-with-cooked-pizza")
 
+// Event listeners
 cook.addEventListener("animationstart", movePizzaToOven, false);
 cook.addEventListener("animationend", movePizzaToOven, false);
 cook.addEventListener("animationiteration", movePizzaToOven, false);
-
-
 packChef.addEventListener("animationstart", removePizzaFromOven, false);
 packChef.addEventListener("animationend", removePizzaFromOven, false);
 packChef.addEventListener("animationiteration", removePizzaFromOven, false);
 
+
+//Sounds
+let orderUp = document.getElementById('order-up');
+let keyboard = document.getElementById('keyboard');
+let footsteps1 = document.getElementById('footsteps-1');
+let footsteps2 = document.getElementById('footsteps-2');
+let fridgeClose = document.getElementById('fridge-close');
+let fridgeOpen = document.getElementById('fridge-open');
+let ovenOpen = document.getElementById('oven-open');
+let ovenClose = document.getElementById('oven-close');
+let bell = document.getElementById('bell');
 
 function movePizzaToOven(e) {
     cook.attributes["id"].nodeValue = "chef-animation";
@@ -32,11 +43,14 @@ function movePizzaToOven(e) {
     switch (e.animationName) {
         case "moveToOven":
             cook.attributes['src'].nodeValue = "img/pizza-man-right.gif";
+            fridgeOpen.play()
             freezer.attributes['src'].nodeValue = "img/freezer-open.png";
             cook.attributes['src'].nodeValue = "img/pizza-man-frozen.gif";
+            footsteps1.play()
            
             switch (e.type) {
                 case "animationend":
+                    ovenClose.play()
                     cookingOven.attributes['src'].nodeValue = 'img/oven-closed.png';
                     cook.style.left = '540px';
                     cook.style.top = '440px';
@@ -48,11 +62,13 @@ function movePizzaToOven(e) {
 
         case "moveToFreezer":
             cook.attributes['src'].nodeValue = "img/pizza-man-right.gif";
+            footsteps1.play()
             
             switch (e.type) {
                 case "animationend":
                     cook.style.left = '1050px';
                     cook.style.top = '520px';
+                    fridgeClose.play()
                     freezer.attributes['src'].nodeValue = "img/freezer-closed1.jpg";
                     cook.attributes["id"].nodeValue = "chef";
                     cook.style = '';
@@ -72,9 +88,11 @@ function removePizzaFromOven(e) {
     switch (e.animationName) {
         case "getPizzaFromOven":
             packChef.attributes['src'].nodeValue = "img/pizza-man-left.gif";
+            footsteps2.play()
            
             switch (e.type) {
                 case "animationend":
+                    ovenOpen.play();
                     cookingOven.attributes['src'].nodeValue = 'img/oven-open.png';
                     packChef.attributes['src'].nodeValue = "img/pizza-man.gif";
                     packChef.style.bottom = "120";
@@ -94,6 +112,7 @@ function removePizzaFromOven(e) {
                     cook.style.left = '1050px';
                     cook.style.top = '520px';
                     freezer.attributes['src'].nodeValue = "img/freezer-closed1.jpg";
+                    footsteps2.play()
                     packChef.attributes['src'].nodeValue = "img/pizza-man.gif";
                     packChef.attributes["id"].nodeValue = "pack-chef";
                     packChef.style = "";
@@ -109,53 +128,51 @@ function removePizzaFromOven(e) {
 
 let oven = {
     isEmpty: true,
-    pizzasInOven: []
+    pizzasInOven: [],
+    cookTime: 5000
 }
 
-function orderRecieved(e) {
-    if (pizzasCooked.length < numberOfCustomers) {
-        console.log("Pizza Ordered: ", customerId);
-        pizzasOrdered.push(customerId);
-
-
-        if (oven.isEmpty == true) {
-            putPizzaInOven(customerId);
-
-        } else {
-            console.log("Outstanding order: ", customerId)
-            ordersWaiting.push(customerId);
-        }
-
-        customerId++;
+function orderRecieved() {
+    keyboard.play();
+    orderUp.play();
+    pizzasOrdered.push(customerId);
+    
+    
+    if (oven.isEmpty = true || oven.isEmpty !== false) {
+        console.log("Oven is empty", oven.isEmpty)
+        putPizzaInOven(customerId);
+        movePizzaToOven(cook);
+        
     } else {
-        alert("Kitchens Closed!");
-        clearInterval(intervalId)
+        console.warn("Outstanding order: ", customerId)
+        ordersWaiting.push(customerId);
     }
+
+    customerId++;
 }
 
 function putPizzaInOven(pizzaId) {
-    if (oven.pizzasInOven.length < 1) {
-        oven.isEmpty = true;
-
-        if(ordersWaiting.length <0) {
+    if (oven.pizzasInOven.length < OVEN_SIZE) {
+        
+        if(ordersWaiting.length > 0) {
             let orderWaiting = ordersWaiting.pop()
-            
             oven.pizzasInOven.push(orderWaiting);
-            movePizzaToOven(cook);
 
-            console.log("Taking order from orders Waiting: ", orderWaiting)
+            console.error("Taking order Waiting: ", orderWaiting)
         } else {
             let pizza = pizzasOrdered.indexOf(pizzaId);
             let order = pizzasOrdered.splice(pizza);
+            oven.isEmpty = false;
+            
             oven.pizzasInOven.push(order);
-            movePizzaToOven(cook);
-
-            console.log("Order up!", order)
+            console.error("Putting pizza in oven: ", order)
         }
+        
+        movePizzaToOven(cook);
     } else {
         oven.isEmpty = false;
 
-        console.log("Oven state: ", oven.isEmpty);
+        console.warn("Oven state: ", oven.isEmpty);
 
         setTimer(oven.pizzasInOven);
     }
@@ -163,26 +180,25 @@ function putPizzaInOven(pizzaId) {
 }
 
 function setTimer(order) {
-    setTimeout(function () {
-        takePizzaOutOfOven(order)
-        removePizzaFromOven(packChef);
-        
-    }, 5000);
+    console.log("Timer set: ", setTimeout(function () {
+        takePizzaOutOfOven(order);
+        bell.play()
+    }, oven.cookTime));
 }
 
 function takePizzaOutOfOven(order) {
-    console.log("Order being removed: ", order)
+    console.error("Order being removed: ", order)
+    removePizzaFromOven(packChef);
 
     for (let i = 0; i < order.length; i++) {
         let pizzasRemoved = order.splice();
         pizzasCooked.push(pizzasRemoved);
-    }
+
+        if(pizzasCooked.length == numberOfCustomers){
+            // alert("Kitchens Closed!");
+            clearInterval(intervalId)
+        }
+    } // runs until all pizzas are out of oven
 
     oven.isEmpty = true;
 }
-
-
-
-
-
-

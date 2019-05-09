@@ -65,7 +65,7 @@ bottom: 85px;
     z-index: 400;
 
     animation-name: getPizzaFromOven;
-	animation-duration:2s;
+	animation-duration:3s;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-in-out;
     animation-direction: normal;
@@ -112,7 +112,7 @@ bottom: 85px;
     top: 530px;
     left: 1050px;
     animation-name: moveToOven;
-	animation-duration:2s;
+	animation-duration:3s;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-in-out;
     animation-direction: normal;
