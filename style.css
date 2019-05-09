@@ -45,20 +45,38 @@ bottom: 85px;
     z-index: 300;
 }
 
- /* #freezer-closed{
+#pack-chef{
     position: absolute;
-    margin-left:540px;
-    bottom:245px;
-    height: 200px;
-     
- } */
+    bottom:20px;
+    right: 780px;
 
+    width: 90px;
+    height: 120px;
+    z-index: 400;
+}
+
+#pack-chef-animation {
+    position: absolute;
+    bottom:20px;
+    right: 780px;
+
+    width: 90px;
+    height: 120px;
+    z-index: 400;
+
+    animation-name: getPizzaFromOven;
+	animation-duration:2s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+    animation-direction: normal;
+}
 
  #freezer{
     position: absolute;
-    bottom: 110px;
+    bottom: 140px;
     left: 1080px;
-    height: 200px;
+    height: 230px;
+    width: 190px;
  }
   
 #oven-with-cooked-pizza{
@@ -80,15 +98,28 @@ bottom: 85px;
 #chef {
     position: absolute;
     z-index:2000;
+    /* height: 150px; */
     width:114px; 
-    top: 520px;
+    top: 530px;
+    left: 1050px;
+}
+
+#chef-animation {
+    position: absolute;
+    z-index:2000;
+    /* height: 150px; */
+    width:114px; 
+    top: 530px;
     left: 1050px;
     animation-name: moveToOven;
-	animation-duration:3s;
+	animation-duration:2s;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-in-out;
     animation-direction: normal;
 }
+
+
+
  #piza1{
      position:absolute;
      height: 120px;
@@ -151,7 +182,7 @@ bottom: 85px;
     }
 }
 
-@keyframes cashier-chef{
+/* @keyframes cashier-chef{
     from {
         top: 10px;
         left: 540px;
@@ -161,7 +192,34 @@ bottom: 85px;
         top: 520px;
         left: 1050px;
     }
+} */
+
+@keyframes getPizzaFromOven{
+    from {
+        bottom:20px;
+        right: 780px;
+    }
+
+    to {
+        bottom: 200px;
+        right: 810px;
+    }
 }
+
+@keyframes deliverPizza{
+    from {
+        bottom: 200px;
+        right: 810px;
+    }
+
+    to {
+        bottom:20px;
+        right: 780px;
+    }
+}
+
+
+
 .paused{
     -webkit-animation-play-state:paused;
     -moz-animation-play-state:paused;
