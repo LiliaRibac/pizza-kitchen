@@ -8,7 +8,7 @@ body{
 
  }
 
-
+ 
 #table{
     width: 140px;
     height: 105px;
@@ -39,7 +39,6 @@ bottom: 85px;
 #cashier-chef{
     position: absolute;
     top:390px;
-    /* width: 120px; */
     height: 150px;
     margin-left: 100px;
     z-index: 300;
@@ -50,8 +49,8 @@ bottom: 85px;
     bottom:20px;
     right: 780px;
 
-    width: 90px;
-    height: 120px;
+    width: 100px;
+    height: 150px;
     z-index: 400;
 }
 
@@ -59,9 +58,8 @@ bottom: 85px;
     position: absolute;
     bottom:20px;
     right: 780px;
-
-    width: 90px;
-    height: 120px;
+    width: 100px;
+    height: 150px;
     z-index: 400;
 
     animation-name: getPizzaFromOven;
@@ -98,7 +96,7 @@ bottom: 85px;
 #chef {
     position: absolute;
     z-index:2000;
-    /* height: 150px; */
+
     width:114px; 
     top: 530px;
     left: 1050px;
@@ -107,8 +105,7 @@ bottom: 85px;
 #chef-animation {
     position: absolute;
     z-index:2000;
-    /* height: 150px; */
-    width:114px; 
+     width:114px; 
     top: 530px;
     left: 1050px;
     animation-name: moveToOven;
@@ -121,13 +118,16 @@ bottom: 85px;
 
 
  #piza1{
-     position:absolute;
+     position: absolute;;
      height: 120px;
      width: 230px;
      bottom: 300px;
      margin-left: 310px;
      border-radius: 10px 10px 0px 40px;
+     background-size: cover;
+    display: block;
  }
+
 
  #pizza2{
     position: absolute;
@@ -145,7 +145,7 @@ bottom: 85px;
     top: 630px;
     padding-left: 350px;
     position: absolute;
-    /* z-index: 2; */
+
  }
 
  .person{
@@ -153,10 +153,16 @@ bottom: 85px;
      bottom:-150px;
      left:50px;
      height:150px;
-     /* animation-name:customer;
-     animation-duration: 5s;
-     animation-fill-mode: forwards; */
+   
  }
+
+ #dad{
+    position: absolute;
+    top: 417px;
+    left: 21px;
+    height: 175px;
+}
+ 
 
   @keyframes moveToOven {
     from {
@@ -182,17 +188,6 @@ bottom: 85px;
     }
 }
 
-/* @keyframes cashier-chef{
-    from {
-        top: 10px;
-        left: 540px;
-    }
-
-    to {
-        top: 520px;
-        left: 1050px;
-    }
-} */
 
 @keyframes getPizzaFromOven{
     from {

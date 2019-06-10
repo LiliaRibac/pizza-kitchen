@@ -116,6 +116,7 @@ function removePizzaFromOven(e) {
                     packChef.attributes['src'].nodeValue = "img/pizza-man.gif";
                     packChef.attributes["id"].nodeValue = "pack-chef";
                     packChef.style = "";
+                    packChef.attributes['src'].nodeValue = "img/pizza-man-left.gif";
 
                 break;
             }
@@ -165,7 +166,7 @@ function putPizzaInOven(pizzaId) {
             oven.isEmpty = false;
             
             oven.pizzasInOven.push(order);
-            console.error("Putting pizza in oven: ", order)
+           
         }
         
         movePizzaToOven(cook);
@@ -195,10 +196,10 @@ function takePizzaOutOfOven(order) {
         pizzasCooked.push(pizzasRemoved);
 
         if(pizzasCooked.length == numberOfCustomers){
-            // alert("Kitchens Closed!");
+         
             clearInterval(intervalId)
         }
-    } // runs until all pizzas are out of oven
+    } 
 
     oven.isEmpty = true;
 }
